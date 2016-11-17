@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
 
+  has_many :reviewed_restaurants, through: :reviews, source: :restaurant
   has_many :restaurants, dependent: :destroy
   has_many :reviews
 
@@ -15,4 +16,7 @@ class User < ApplicationRecord
     end
   end
 
+  def has_reviewed?(restaurant)
+  reviewed_restaurants.include? restaurant
+  end
 end
