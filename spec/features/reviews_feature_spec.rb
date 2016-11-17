@@ -27,19 +27,22 @@ feature 'reviewing' do
     # expect(page).not_to have_content("I love it")
   end
 
-  # ID's are hardcoded
+
   # Not yet working!
+  # Parameters: {"utf8"=>"✓", "authenticity_token"=>"sHjhWPyIqLFsxI1phQbgkbgsSvOtfkxSybupXXWab0YDeQCuJPEE+RUxf5vxK0exjiV9yOQQed0IiqYM7860wQ==",
+  #   "review"=>{"thoughts"=>"greatest", "rating"=>"5"}, "commit"=>"Leave Review", "restaurant_id"=>"4"}
+  # Need to diable "validates :user, uniqueness: { scope: :restaurant, message: "has reviewed this restaurant already" }" on review model, to test
   # scenario "cannot add a review if reviewed already" do
   #   user = User.create(email: 'joe@joe.com', password: 'joejoe', password_confirmation: 'joejoe')
-  #   @restaurant = Restaurant.create(name: "Cafe del Mar", description: "On the beach al fresco", user_id: user.id)
-  #   p @restaurant
+  #   restaurant = Restaurant.create(name: "Cafe del Mar", description: "On the beach al fresco", user_id: user.id)
   #   visit "/restaurants"
-  #   leave_review(restaurant: "Cafe del Mar", thoughts: "so so", rating: 3)
-  #   click_link "Review #{@restaurant.name}"
+  #   expect(page).to have_content("Cafe del Mar")
+  #     # leave_review(restaurant: restaurant.name, thoughts: "so so", rating: 3)
   #   expect {
-  #     page.driver.submit :post, "/restaurants/#{@restaurant.id}/reviews", {"review"=>{"thoughts"=>"xyz", "rating"=>"123", "restaurant_id" => 1, "user_id" => 1}}
-  #   }.not_to change(Review, :count)
-  #
+  #     page.driver.submit :post, "/restaurants/#{restaurant.id}/reviews", {"review"=>{"thoughts"=>"xyz", "rating"=>4 },"restaurant_id" => restaurant.id}
+  #     # page.driver.submit :post, "/restaurants/#{restaurant.id}/reviews", {"review"=>{"thoughts"=>"xyz", "rating"=>4, "restaurant_id" => restaurant.id, "user_id" => user.id}}
+  #   }.to change(Review, :count)
+  #   p review
   # end
 
 end
