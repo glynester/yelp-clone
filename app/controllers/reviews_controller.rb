@@ -7,8 +7,12 @@ before_action :authenticate_user!
   end
 
   def create
-    @restaurant = Restaurant.find(params[:restaurant_id])
-    @restaurant.reviews.create(review_params)
+    restaurant = Restaurant.find(params[:restaurant_id])
+    # @restaurant.reviews.create(review_params)
+    review = Review.new(review_params)
+    review.user_id = current_user.id
+    review.restaurant_id = restaurant.id
+    review.save
     redirect_to "/restaurants"
   end
 
