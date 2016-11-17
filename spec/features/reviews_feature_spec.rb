@@ -21,9 +21,10 @@ feature 'reviewing' do
     sign_up_and_sign_in
     create_restaurant
     leave_review(restaurant: "KFC", thoughts: "so so", rating: 3)
-    leave_review(restaurant: "KFC", thoughts: "I love it", rating: 4)
-    expect(page).to have_content("This restaurant has already been reviewed by you")
-    expect(page).not_to have_content("I love it")
+    # leave_review(restaurant: "KFC", thoughts: "I love it", rating: 4)
+    expect(page).to_not have_link("Review KFC")
+    # expect(page).to have_content("This restaurant has already been reviewed by you")
+    # expect(page).not_to have_content("I love it")
   end
 
   # ID's are hardcoded

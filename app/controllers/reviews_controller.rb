@@ -7,9 +7,8 @@ before_action :authenticate_user!
   end
 
   def create
-
     restaurant = Restaurant.find(params[:restaurant_id])
-      if current_user.has_reviewed?(restaurant)
+      if current_user and current_user.has_reviewed?(restaurant)
         flash[:notice] = "This restaurant has already been reviewed by you"
       end
     # @restaurant.reviews.create(review_params)
