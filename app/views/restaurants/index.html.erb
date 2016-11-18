@@ -4,7 +4,9 @@
     <h3><%= restaurant.description %></h3>
     <h3>Star rating: <%= star_rating(restaurant.average_rating) %></h3>
     <% restaurant.reviews.each do |review| %>
-      <p><%= review.thoughts %> <%= review.rating %></p>
+      <p><%= review.thoughts %> <%= review.rating %>
+      <%= pluralize review.endorsements.count, 'endorsement' %>
+      <%= link_to "Endorse Review", "/reviews/#{review.id}/endorsements", method: :post %></p>
     <% end %>
     <% if current_user and !current_user.has_reviewed?(restaurant) %>
       <%= link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant) %>
