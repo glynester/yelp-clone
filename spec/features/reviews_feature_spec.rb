@@ -54,7 +54,7 @@ feature 'reviewing' do
     click_link "Sign out"
     sign_up_and_sign_in(email: 'jon@jon.com', password: 'jonjon')
     leave_review(restaurant: "KFC", thoughts: "Not too bad", rating: 4)
-    expect(page).to have_content("Average rating: ★★★★☆")
+    expect(page).to have_content("Star rating: ★★★★☆")
 
   end
 
