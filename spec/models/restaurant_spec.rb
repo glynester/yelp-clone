@@ -23,4 +23,29 @@ describe '#average rating' do
       expect(restaurant.average_rating).to eq 'N/A'
     end
   end
+
+  context 'one review' do
+    it 'returns that rating' do
+      user = User.create(email: 'joe@joe.com', password: 'joejoe', password_confirmation: 'joejoe')
+      second_user = User.create(email: 'jack@jack.com', password: 'jackjack', password_confirmation: 'jackjack')
+      restaurant = Restaurant.create(name: "Beachcomber", user_id: user.id)
+      restaurant.reviews.create(rating: 4, user_id: second_user.id)
+      expect(restaurant.average_rating).to eq 4
+    end
+  end
+
+  context 'multiple reviews' do
+    it 'returns the average rating' do
+      user = User.create(email: 'joe@joe.com', password: 'joejoe', password_confirmation: 'joejoe')
+      second_user = User.create(email: 'jack@jack.com', password: 'jackjack', password_confirmation: 'jackjack')
+      third_user = User.create(email: 'jim@jim.com', password: 'jimjim', password_confirmation: 'jimjim')
+      restaurant = Restaurant.create(name: "Beachcomber", user_id: user.id)
+      restaurant.reviews.create(rating: 1, user_id: second_user.id)
+      restaurant.reviews.create(rating: 3, user_id: third_user.id)
+      expect(restaurant.average_rating).to eq 2
+    end
+  end
+
+
+
 end
