@@ -45,4 +45,19 @@ feature 'reviewing' do
   #   p review
   # end
 
+  scenario "displays an average rating for all reviews" do
+    sign_up_and_sign_in
+    create_restaurant
+    click_link "Sign out"
+    sign_up_and_sign_in(email: 'jack@jack.com', password: 'jacjac')
+    leave_review
+    click_link "Sign out"
+    sign_up_and_sign_in(email: 'jon@jon.com', password: 'jonjon')
+    leave_review(restaurant: "KFC", thoughts: "Not too bad", rating: 5)
+    expect(page).to have_content("Average rating: 4")
+
+  end
+
+
+
 end

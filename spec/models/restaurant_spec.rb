@@ -14,3 +14,13 @@ describe "Restaurant", type: :model do
   end
 
 end
+
+describe '#average rating' do
+  context 'no reviews' do
+    it 'returns "N/A" when there are no reviews' do
+      user = User.create(email: 'joe@joe.com', password: 'joejoe', password_confirmation: 'joejoe')
+      restaurant = Restaurant.create(name: "Beachcomber", user_id: user.id)
+      expect(restaurant.average_rating).to eq 'N/A'
+    end
+  end
+end
